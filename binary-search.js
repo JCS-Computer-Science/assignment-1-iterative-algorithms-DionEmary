@@ -1,22 +1,17 @@
 function binarySearch(array, searchTerm) {
-let start = 0;
-let end = array.length - 1;
-	while(start <= end){
-		let middle = Math.floor((start + end) / 2);
+	let middle = Math.floor(array.length / 2);
 
-		if(array[middle] == searchTerm){
-			return middle;
-			// Search Term was found and returned
-		}else if(array[middle] > searchTerm){
-			end = middle - 1
-			// Sorts to the left side of the array if search term is smaller than the middle term
-		}else if(array[middle] < searchTerm){
-			start = middle + 1
-			// Sorts to the right side of the array if search term is larger than the middle term
-		}
-	}
+	if (array.length == 1 && array[0] != searchTerm) {
+		return null;
+	  }
 
-	return null;
+	  if (searchTerm == array[middle]) {
+		return middle;
+	  } else if (searchTerm < array[middle]) {
+		return binarySearch(array.slice(0, middle), searchTerm);
+	  } else if (searchTerm > array[middle]) {
+		return middle + binarySearch(array.slice(middle), searchTerm);
+	  }
 }
 
 module.exports = binarySearch;
